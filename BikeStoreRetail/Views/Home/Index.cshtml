@@ -1,0 +1,63 @@
+﻿@model StockSearchModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+<div>
+    <div style="margin:20px">
+        <p class="codeInfo" style="background:#FFC300;padding:10px;"> Grid and pagination implimented manually. Features created using component view, DI, 
+            data binding, Jquery, Ajax, ADO.net etc. For project code please visit GitHub Repo.</p>
+    </div>
+    <h4 class="display-6" style="text-align:center;">Search, View, and Update Stock Quantities</h4>
+    <table style="display: flex;justify-content: center;margin-top:30px; margin-bottom:15px;">
+        <!--Following fields are not part of the form-->
+        <tr class="spaceUnder">
+            <td colspan="1"><label for="Products">Product Search:</label> </td>
+            <td colspan="3" style="padding-left:5px;"><input style="width: 100%;" id="Products" /></td>
+        </tr>
+
+        <form id="filterForm" asp-controller="Home" asp-action="SearchStockData" method="post">
+        <input asp-for="ProductId" type="hidden" />
+        
+        <tr>
+            <td align="right">
+                <label asp-for="StoreId" >Store: </label>
+            </td>
+            <td style="padding-right:10px; padding-left:5px;">
+                <select asp-for="StoreId" style="width: 200px;" class="custom-select mr-sm-2" asp-items="@(new SelectList(ViewBag.Stores, nameof(StoreModel.Id), nameof(StoreModel.Name)))">
+                    <option value="-1">All</option>
+                </select>
+            </td>
+        
+            <td>
+                <label asp-for="BrandId">Brand: </label>
+            </td>
+            <td style="padding-left:5px;">
+                <select class="custom-select mr-sm-2" style="width: 200px;" asp-for="BrandId" asp-items="@(new SelectList(ViewBag.Brands, nameof(BrandModel.Id), nameof(BrandModel.Name)))">
+                    <option value="-1">All</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+        <td align="right">
+                <label asp-for="CategoryId">Category: </label>
+        </td>
+        <td colspan="2" style="padding-left:5px;">
+            <select class="custom-select mr-sm-2" style="width: 200px;" asp-for="CategoryId" asp-items="@(new SelectList(ViewBag.Categories, nameof(CategoryModel.Id), nameof(CategoryModel.Name)))">
+                    <option value="-1">All</option>
+                </select>
+            </td>
+
+        <td align="left" style="padding-top:5px;">
+                <button type="button" class="btn btn-primary" onclick="submitFilterForm(true)">Filter Data</button>
+            </td>
+        </tr>
+        
+        </form>
+    </table>
+</div>
+<div id="stock-grid-container" class="text-center">
+    
+    <vc:stock-grid /> <!--load grid and pagination through component View-->
+
+    <input id="pageName" type="hidden" value="SalesData" />
+</div>

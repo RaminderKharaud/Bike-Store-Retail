@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/8.0.1/bootstrap/bootstrap-main.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.3/themes/base/jquery-ui.css">
+    
+
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2022.2.510/styles/kendo.common.min.css">
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2022.2.510/styles/kendo.rtl.min.css">
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2022.2.510/styles/kendo.default.min.css">
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2022.2.510/styles/kendo.mobile.all.min.css">
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/themes/8.0.1/default/default-main.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+    <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
+    @*Kendo UI scripts*@
+    <script src="https://kendo.cdn.telerik.com/2024.2.514/js/kendo.all.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2024.2.514/js/kendo.aspnetmvc.min.js"></script>
+    <script src="~/kendo-ui-license.js"></script>
+
+ 
+    <script src="~/js/site.js"></script>
+
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"] - BikeStoreRetail</title>
+
+    <!--
+    <link rel="stylesheet" href="~/BikeStoreRetail.styles.css" asp-append-version="true" />
+    -->
+</head>
+@{
+    string? controllerName = this.ViewContext.RouteData.Values["controller"]?.ToString();
+}
+<body style="@(controllerName == "Home" ? "background:#343338;" : string.Empty)">
+    <header>
+        <nav>
+           <div class="header"> 
+               <div style=" min-width: 500px; margin: 15px 25px 0px 25px;">
+                    <text class="BKtitle">BikeStore Retail</text>
+               </div>
+               <div>
+                    <ul class="tabs" >
+                        <li page="true" id="sales"><a asp-controller="Home" asp-action="Index" style="text-decoration: none;"> Stock Data </a></li>
+                        <li page="true" id="charts"><a asp-controller="Chart" asp-action="Index" style="text-decoration: none;"> Charts </a></li>
+                   </ul>
+               </div>
+                
+                @if (controllerName == "Home")
+                {
+                    <div style="left:792px;width:261px" class="divider"></div>
+                }
+                else
+                {
+                    <div style="left:465px;width:314px" class="divider"></div>
+                }
+           </div>
+        </nav>
+    </header>
+    <div >
+        <main role="main">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer >
+        <div id="divCopy" style="width:15%; margin:auto;" >
+            &copy; 2024 - BikeStoreRetail 
+        </div>
+    </footer>
+    
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

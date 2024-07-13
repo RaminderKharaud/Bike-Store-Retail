@@ -1,0 +1,98 @@
+body {
+    background: white;
+    transition: background 1s;
+}
+
+tr.spaceUnder > td {
+    padding-bottom: 7px;
+}
+
+.BKtitle {
+    font-family: Georgia, serif;
+    font-size: 50px;
+    color: #0588FC;
+    font-weight: 700;
+    text-decoration: none solid rgb(68, 68, 68);
+    font-style: italic;
+    transition: color 2s;
+}
+
+.header {
+    z-index: 20;
+    position: relative;
+    box-shadow: 0 6px 6px -6px #0588FC;
+    -moz-box-shadow: 0 6px 6px -6px #0588FC;
+    -webkit-box-shadow: 0 6px 6px -6px #0588FC;
+}
+
+.tabs {
+    bottom: 0;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+    .tabs > li {
+        font-family: "Trebuchet MS", Helvetica, sans-serif;
+        font-size: 28px;
+        letter-spacing: 0px;
+        word-spacing: 2px;
+        color: #0588FC;
+        font-weight: 700;
+        text-decoration: none;
+        font-style: normal;
+        font-variant: normal;
+        text-transform: none;
+        height: 60px;
+        line-height: 60px;
+        text-align: center;
+        display: inline-block;
+        box-sizing: border-box;
+        padding: 0px 30px 10px 25px;
+        border-bottom: 4px solid transparent;
+        transition: border-bottom .3s, color 2s;
+    }
+
+        .tabs > li:hover,
+        .tabs > li.active {
+            cursor: pointer;
+        }
+
+.divider {
+    position: absolute;
+    bottom: 0;
+    height: 5px;
+    background: #f9690e;
+    transition: left .5s, width .5s;
+}
+
+.codeInfo {
+    border-radius: 25px;
+    background: #73AD21;
+    padding: 15px;
+    text-align: center;
+    font-size: 19px;
+}
+
+/*html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+} */

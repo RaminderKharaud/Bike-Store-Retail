@@ -1,0 +1,65 @@
+﻿@model IList<StockRecordViewModel>
+
+<div>
+    @if (Model.Count == 0)
+    {
+        <p>No Record Found</p>
+    }
+    <table class="table table-hover table-striped">
+        <caption>Product stoke list</caption>
+        <thead class="table-primary">
+            <tr>
+                <th scope="col">Store Name</th>
+                <th scope="col">Product Name</th>
+                <th scope="col">Brand</th>
+                <th scope="col">Category</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Update Quantity</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var BikeStoreRecord in Model)
+            {
+                <tr class=" table-info">
+                    <td> @BikeStoreRecord.StoreName </td>
+                    <td> @BikeStoreRecord.ProductName </td>
+                    <td> @BikeStoreRecord.Brand</td>
+                    <td> @BikeStoreRecord.Category </td>
+                    <td id="@BikeStoreRecord.StoreId-@BikeStoreRecord.ProductId-quantity">
+                        @BikeStoreRecord.Quantity 
+                     </td>
+                    <td id="@BikeStoreRecord.StoreId-@BikeStoreRecord.ProductId-update">
+                        <button type="button" id="@BikeStoreRecord.StoreId-@BikeStoreRecord.ProductId-cancelButton" style="display: none">Cancel</button>
+                        <button type="button" id="@BikeStoreRecord.StoreId-@BikeStoreRecord.ProductId-saveButton" style="display: none">Save</button>
+                        <button type="button" id="@BikeStoreRecord.StoreId-@BikeStoreRecord.ProductId-updateButton" onclick="update(@BikeStoreRecord.StoreId, @BikeStoreRecord.ProductId, @BikeStoreRecord.Quantity)">Update Quantity</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<div style="text-align: center;">
+    @{
+        int pageNumber = ViewBag.PageNumber;
+        int totalPages = ViewBag.TotalPages;
+    }
+    <nav aria-label="...">
+        <ul class="pagination pagination-lg justify-content-center">
+            @for(int i = 1; i <= totalPages; i++)
+            {
+                    if(i == pageNumber)
+                    {
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" tabindex="-1">@i</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="page-item">
+                            <a class="page-link" href="#" onClick="submitFilterForm(false,@i)">@i</a>
+                        </li>
+                    } 
+            }
+        </ul>
+    </nav> 
+</div>

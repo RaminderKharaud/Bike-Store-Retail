@@ -1,0 +1,98 @@
+﻿@model ChartsDataModel
+@{
+    ViewData["Title"] = "Charts";
+}
+
+@{
+    //these varialbes will be used to pass data to javascript for updating Bar chart data
+    var orders = Newtonsoft.Json.JsonConvert.SerializeObject(Model.TotalOrdersByStore);
+    var sales = Newtonsoft.Json.JsonConvert.SerializeObject(Model.TotalSalesByStore);
+}
+
+<div style="margin:20px;">
+    <p class="codeInfo"> Charts are implemented using Telerik Components for .Net Core free trail. Data populated with ADO.Net. For project code please visit GitHub Repo</p>
+</div>
+<div style="width: 95%; overflow: hidden; margin:0px 0px 0px 40px;">
+    <div style="width: 15%; float: left; margin-top:200px;">
+        <div class="form-check">
+            <input class="form-check-input" onchange="updateChart('@orders', 'Total Orders Per Store')" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+            <label class="form-check-label"  style="color:antiquewhite" for="exampleRadios1">
+                By Total Number Of Orders
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" onchange="updateChart('@sales','Total Sales Per Store')" name="exampleRadios" id="exampleRadios2" value="option2">
+            <label class="form-check-label" style="color:antiquewhite" for="exampleRadios2">
+                By Total Sales
+            </label>
+        </div>
+    </div>
+    <!--Bar Chart implementation-->
+    <div style="margin-left: 18%;" class="demo-section wide">
+        <kendo-chart name="barchart" theme="black">
+            <category-axis>
+                <category-axis-item categories=Model.Categories.ToArray()>
+                    <major-grid-lines visible="false" />
+                </category-axis-item>
+            </category-axis>
+            <series>
+                @foreach(string key in Model.TotalOrdersByStore.Keys)
+                {
+                    <series-item type="ChartSeriesType.Bar"
+                             name= "@key"
+                             data=Model.TotalOrdersByStore[key].ToArray()>
+                    </series-item>
+                }
+            </series>
+            <value-axis>
+                <value-axis-item name="" type="numeric">
+                    <line visible="false" />
+                    <major-grid-lines visible="true" />
+                </value-axis-item>
+            </value-axis>
+            <chart-area background="transparent">
+            </chart-area>
+            <chart-legend visible="true">
+            </chart-legend>
+            <chart-title text="Total Orders Per Store" color="wheat" description="Total Orders and Sales Of Each Store" font="30px Arial,Helvetica,sans-serif">
+            <margin bottom="20" />
+            </chart-title>
+            <tooltip template="#= series.name #: #= value #" visible="true">
+            </tooltip>
+        </kendo-chart>
+    </div>
+</div>
+
+<div>
+    <div style="margin-top:40px; margin-bottom:50px;">
+       
+        <kendo-chart name="piechart" theme="moonlight">
+            <chart-title text="Sale Contribution Of Each Store" color="wheat" font="30px Arial,Helvetica,sans-serif" position="ChartTitlePosition.Top">
+                <margin bottom="10" />
+            </chart-title>
+            <chart-legend visible="false"></chart-legend>
+            <series-defaults type="ChartSeriesType.Pie"></series-defaults>
+            <chart-area background="transparent"></chart-area>
+            <series>
+                @{
+                   dynamic[] pieData = new dynamic[Model.SalesPercentageByStore.Count];
+                    int i = 0;
+
+                    foreach (string key in Model.SalesPercentageByStore.Keys)
+                    {
+                        pieData[i] = new { category = key, value = Math.Round(Model.SalesPercentageByStore[key],2) };
+                        i++;
+                    }
+                }
+                <series-item start-angle="150" data='@pieData'>
+                    <labels visible="true" position="ChartSeriesLabelsPosition.OutsideEnd" template="#= category #: \n #= value#%" background="transparent"></labels>
+                </series-item>
+            </series>
+            <tooltip visible="true" format="{0}%"></tooltip>
+        </kendo-chart>
+
+    </div>
+</div>
+
+
+<input id="pageName" type="hidden" value="Chart" />
