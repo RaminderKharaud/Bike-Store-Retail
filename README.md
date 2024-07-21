@@ -1,6 +1,6 @@
 # Bike-Store-Retail
 .Net Core Dashboard Web Application
-### Website is live at :
+### Website is live at : https://tinyurl.com/BikeStoreRetail
 This webb application is created in .Net 8 and uses open source SQL Server Sample Database BikeStore (repo link given below).<br />  
 
 #### Bikstore DataBase repo: https://github.com/sebsto/babelfish-demo/tree/main/sql
